@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" href="src/css/style.css">
+    <title>Магазин медицинского оборудования</title>
+</head>
+<body>
+    <header>
+        <div class="wrapper">
+            <div class="logo">
+                <a href="#" class="link">
+                    <img src="src/images/logo.svg" alt="logo" width="263" height="39">
+                </a>
+                <div>Поставщик медицинского оборудования</div>
+            </div>
+            <nav>
+                <ul>
+                    <li class="nav_item">
+                        <a href="#">Главная</a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="#">Каталог</a>
+                        <ul>
+                            <li>
+                                <a href="#">Тренажеры для реабилитации</a>
+                            </li>
+                            <li>
+                                <a href="#">Дезинфекция и стерилизация</a>
+                            </li>
+                            <li>
+                                <a href="#">Оборудование для реанимации</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav_item">
+                        <a href="#">О компании</a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="#">Личный кабинет</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="inner">
+                <a href="tel:+73832210424" class="header__phone">+7(383)221-04-24</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="authregsect about container">
+            <img src="src/images/pulse.svg" width="177" height="156" alt="pulse" class="about__pulse">
+            <div class="form__outer" id="auth-wrapper">
+                <h1 class="title">Авторизация</h1>
+                <form class="authreg__form" action="" method="post" id="auth-form">
+                    <label for="auth_email">E-mail</label>
+                    <input type="email" name="auth_email" id="auth_email" placeholder="example@mail.ru">
+                    <label for="auth_password">Пароль</label>
+                    <input type="password" name="auth_password" id="auth_password" placeholder="**************">
+                    <p class="change__screen">
+                        У вас еще нет аккаунта? <span>Зарегистрироваться</ы>
+                    </p>
+                    <input type="submit">
+                </form>
+            </div>
+            <div class="form__outer" id="reg-wrapper" style="display: none;">
+                <h1 class="title">Регистрация</h1>
+                <form class="authreg__form" action="" method="post" id="reg-form">
+                    <label for="reg_email">E-mail</label>
+                    <input type="email" name="reg_email" id="reg_email" placeholder="example@mail.ru">
+                    <label for="reg_name">ФИО</label>
+                    <input type="text" name="reg_name" id="reg_lastname" placeholder="Иванов Иван Иванович">
+                    <label for="reg_password">Пароль</label>
+                    <input type="password" name="reg_password" id="reg_password" placeholder="**************">
+                    <label for="reg_password">Подтвердите пароль</label>
+                    <input type="password" name="reg_password" id="reg_password" placeholder="**************">
+                    <p class="change__screen">
+                        У вас уже есть аккаунт? <span>Авторизироваться</ы>
+                    </p>
+                    <input type="submit">
+                </form>
+            </div>
+            <img src="src/images/about.svg" alt="about" width="2094" height="956" loading="lazy" class="about__fon">
+            <img src="src/images/authreg.png" alt="doctor" loading="lazy" width="635" height="768" class="about__doctor">
+        </section>
+
+        
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer__top">
+                <div class="footer__left">
+					<a href="/" class="footer__logo">
+						<img src="src/images/logo.svg" width="263" height="39" alt="logo" class="footer__logoImg">
+					</a>
+					<div class="footer__logoText">Поставщик медицинского оборудования</div>
+				</div>
+                
+                <div class="footer__mid">
+					<div class="footer__catalogNav">
+						<ul id="menu-podval-1" class="">
+                            <li class="menu-item">
+                                <a href="#"><b>Каталог</b></a>
+                                <ul class="sub-menu">
+                                    <li class="menu-item"><a href="#">Дезинфекция и стерилизация</a></li>
+                                    <li class="menu-item"><a href="#">Оборудование для реанимации</a></li>
+                                    <li class="menu-item"><a href="#">Тренажеры для реабилитации</a></li>
+                                </ul>
+                            </li>
+                        </ul>					
+                    </div>	
+                    <div class="footer__nav">
+                        <ul id="menu-podval-2" class="">
+                            <li class="menu-item"><a href="#">Новости</a></li>
+                            <li class="menu-item"><a href="#">О компании</a></li>
+                            <li class="menu-item"><a href="#">Контакты</a></li>
+                        </ul>
+                    </div>
+				</div>
+
+                <div class="footer__right">
+					<div class="footer__address">Адрес: 630091, г. Новосибирск,<br> ул. Некрасова, д.12, оф. 11</div>
+					<a href="tel:+73832210424" class="footer__phone">+7 (383) 221-04-24</a>
+					<a href="mailto: grandmedika@yandex.ru" class="footer__mail"> grandmedika@yandex.ru</a>
+				</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="src/js/script.js"></script>
+</body>
+</html>
