@@ -9,50 +9,13 @@
     <title>Магазин медицинского оборудования</title>
 </head>
 <body>
-    <header>
-        <div class="wrapper">
-            <div class="logo">
-                <a href="#" class="link">
-                    <img src="src/images/logo.svg" alt="logo" width="263" height="39">
-                </a>
-                <div>Поставщик медицинского оборудования</div>
-            </div>
-            <nav>
-                <ul>
-                    <li class="nav_item">
-                        <a href="#">Главная</a>
-                    </li>
-                    <li class="nav_item">
-                        <a href="#">Каталог</a>
-                        <ul>
-                            <li>
-                                <a href="#">Тренажеры для реабилитации</a>
-                            </li>
-                            <li>
-                                <a href="#">Дезинфекция и стерилизация</a>
-                            </li>
-                            <li>
-                                <a href="#">Оборудование для реанимации</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav_item">
-                        <a href="#">О компании</a>
-                    </li>
-                    <li class="nav_item">
-                        <a href="#">Личный кабинет</a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="inner">
-                <a href="tel:+73832210424" class="header__phone">+7(383)221-04-24</a>
-            </div>
-        </div>
-    </header>
+    <?php 
+        include "components/header.php";
+    ?>
     <main>
         <section class="container userContentSize">
             <h1 class="title">О компании</h1>
-            <div class="sections__top">
+            <div class="">
                 <div class="userContent"> 
                     <p><span style="font-weight: 400;">Наша компания называется «Гранд-Медика». Наша специализация ‒ продажа медицинского оборудования оптом. У нас можно приобрести:</span></p>
                     <ul>
@@ -79,47 +42,8 @@
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <div class="footer__top">
-                <div class="footer__left">
-					<a href="/" class="footer__logo">
-						<img src="src/images/logo.svg" width="263" height="39" alt="logo" class="footer__logoImg">
-					</a>
-					<div class="footer__logoText">Поставщик медицинского оборудования</div>
-				</div>
-                
-                <div class="footer__mid">
-					<div class="footer__catalogNav">
-						<ul id="menu-podval-1" class="">
-                            <li class="menu-item">
-                                <a href="#"><b>Каталог</b></a>
-                                <ul class="sub-menu">
-                                    <li class="menu-item"><a href="#">Дезинфекция и стерилизация</a></li>
-                                    <li class="menu-item"><a href="#">Оборудование для реанимации</a></li>
-                                    <li class="menu-item"><a href="#">Тренажеры для реабилитации</a></li>
-                                </ul>
-                            </li>
-                        </ul>					
-                    </div>	
-                    <div class="footer__nav">
-                        <ul id="menu-podval-2" class="">
-                            <li class="menu-item"><a href="#">Новости</a></li>
-                            <li class="menu-item"><a href="#">О компании</a></li>
-                            <li class="menu-item"><a href="#">Контакты</a></li>
-                        </ul>
-                    </div>
-				</div>
-
-                <div class="footer__right">
-					<div class="footer__address">Адрес: 630091, г. Новосибирск,<br> ул. Некрасова, д.12, оф. 11</div>
-					<a href="tel:+73832210424" class="footer__phone">+7 (383) 221-04-24</a>
-					<a href="mailto: grandmedika@yandex.ru" class="footer__mail"> grandmedika@yandex.ru</a>
-				</div>
-            </div>
-        </div>
-    </footer>
-
-    <script src=""></script>
+    <?php 
+        include "components/footer.php";
+    ?>
 </body>
 </html>

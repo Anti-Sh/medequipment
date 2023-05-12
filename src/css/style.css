@@ -86,8 +86,11 @@ body{
     overflow-x: hidden;
 }
 
-a{
+a {
+    transition: 0.3s;
+    font-weight: 500;
     text-decoration: none;
+    color: var(--blue);
 }
 
 ul, ol{
@@ -169,6 +172,14 @@ header nav ul ul a{
 
 header nav ul li.nav_item:not(:last-child) {
     margin: 0 1.95em 0 0;
+}
+
+.nav_item a:hover {
+    color: var(--blue);
+}
+
+.header__phone:hover {
+    color: var(--blue);
 }
 
 header nav ul ul::before {
@@ -805,10 +816,6 @@ main {
     width: 50%;
 }
 
-
-
-
-
 /* Footer */
 
 footer {
@@ -1043,7 +1050,7 @@ footer {
 }
 
 .catalog__items__wrapper .catalog__item {
-    width: 20.91165%;
+    width: calc(100%/4 - 4em);
     margin-bottom: 1.6875em;
 }
 
@@ -1086,6 +1093,10 @@ footer {
     flex-shrink: 0;
 }
 
+.authreg__form input[type="submit"]:hover {
+    cursor: pointer;
+}
+
 .change__screen {
     font-size: 1.2em;
 }
@@ -1109,4 +1120,25 @@ footer {
 
 .questions__form__wrapper input[type="submit"]:hover {
     cursor: pointer;
+}
+
+.notifications__wrapper {
+    z-index: 100;
+    position: fixed;
+    height: 50vh;
+    top: 0px;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    justify-content: flex-end;
+    overflow: auto;
+}
+
+.notification {
+    margin-top: 1em;
+    background-color: #fff;
+    padding: 1.475em 1.175em;
+    border: max(1px,0.0715em) solid var(--blue);
+    border-radius: 1.475em;
 }
