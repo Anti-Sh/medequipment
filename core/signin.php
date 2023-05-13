@@ -7,10 +7,10 @@ $password = $_POST['password'];  // Взятие значения из POST
 $error_fields = [];  // Незаполненные поля
 
 if ($email === '') {
-    $error_fields[] = 'aemail';
+    $error_fields[] = 'auth_email';
 }
 if ($password === '') {
-    $error_fields[] = 'apassword';
+    $error_fields[] = 'auth_password';
 }
 
 if (!empty($error_fields)) {
@@ -22,6 +22,8 @@ if (!empty($error_fields)) {
     echo json_encode($response); // Отправка JSON на страницу
     die(); // Прекращение выполнения кода
 }
+
+$password = hash('sha256', $password);
 
 $check_user = mysqli_query($connect, "SELECT * FROM `users` WHERE `email` = '$email' AND `password` = '$password'");
 

@@ -10,6 +10,11 @@ $(function() {
         $(".notification").last().remove();
     };
 
+    function changeAuthRegScreen() {
+        $("#auth-wrapper").slideToggle(300);
+        $("#reg-wrapper").slideToggle(300);
+    }
+
     $("#menu-catalog-link").on("mouseover", (e) => {
         $("#menu-catalog-link ul").css("opacity", 1);
         $("#menu-catalog-link ul").css("visibility", "visible");
@@ -22,10 +27,7 @@ $(function() {
         $("header").css("border-radius", "0 0 1.625em 1.625em")
     });
     
-    $(".change__screen span").on("click", (e) => {
-        $("#auth-wrapper").slideToggle(300);
-        $("#reg-wrapper").slideToggle(300);
-    });
+    $(".change__screen span").on("click", changeAuthRegScreen);
 
     $("#auth-form").on("submit", (e) => {
         e.preventDefault();
@@ -44,7 +46,7 @@ $(function() {
             },
             success (data) {
                 if (data.status) {
-                    notification("Успешно", data.message);
+                    notification("Успешно", "Вы авторизированы!");
                 } 
                 else {
                     notification("Ошибка", data.message);
@@ -60,21 +62,21 @@ $(function() {
     $("#reg-form").on("submit", (e) => {
         e.preventDefault();
         // Регистрация
-        
+
         let email = $("#reg_email").val(),
             fio = $("#reg_name").val(),
             password = $("#reg_password").val(),
             password_confirmation = $("#reg_password_confirm").val();
 
         $.ajax({
-            url: '../../core/signin.php',
+            url: '../../core/signup.php',
             type: 'POST',
             dataType: 'json',
             data: {
                 email: email,
                 fio: fio,
                 password: password,
-                password_confirmation: password_confirmation
+                password_confirm: password_confirmation
             },
             success (data) {
                 if (data.status) {

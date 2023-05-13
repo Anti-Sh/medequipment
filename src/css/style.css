@@ -1133,6 +1133,7 @@ footer {
     width: 25vw;
     justify-content: flex-end;
     overflow: auto;
+    pointer-events: none;
 }
 
 .notification {
@@ -1141,4 +1142,5 @@ footer {
     padding: 1.475em 1.175em;
     border: max(1px,0.0715em) solid var(--blue);
     border-radius: 1.475em;
+    pointer-events: none;
 }

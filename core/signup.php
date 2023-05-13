@@ -10,8 +10,6 @@ $error_fields = [];  // Незаполненные поля
 
 if ($email === '') $error_fields[] = 'reg_email'; // Проверка полей на пустоту
 if ($fio === '') $error_fields[] = 'reg_name'; // Проверка полей на пустоту
-$fio_arr = str_split($fio);
-if (count($fio_arr) != 3) $error_fields[] = 'reg_name';
 if ($password === '') $error_fields[] = 'reg_password'; // Проверка полей на пустоту
 if ($password_confirm === '') $error_fields[] = 'reg_password_confirm'; // Проверка полей на пустоту
 
@@ -25,7 +23,7 @@ if (!empty($error_fields)) { // Проверка на наличие пусты�
     die(); // Прекращение выполнения кода
 }
 if(filter_var($email, FILTER_VALIDATE_EMAIL) === false){ // Проверка почты на валидность
-    $error_fields[] = 'remail'; 
+    $error_fields[] = 'reg_email'; 
     $response = [ // Создание JSON
         "status" => false,
         "message" => "Укажите существующую почту!",
@@ -34,9 +32,20 @@ if(filter_var($email, FILTER_VALIDATE_EMAIL) === false){ // Проверка п�
     echo json_encode($response); // Отправка JSON на страницу
     die(); // Прекращение выполнения кода
 }
+$fio_arr = explode(" ", $fio);
+if (count($fio_arr) != 3) { // Проверка почты на валидность
+    $error_fields[] = 'reg_name';
+    $response = [ // Создание JSON
+        "status" => false,
+        "message" => "Проверьте корректность заполнения поля ФИО!",
+        "fields" => $error_fields
+    ];
+    echo json_encode($response); // Отправка JSON на страницу
+    die(); // Прекращение выполнения кода
+}
 if ($password !== $password_confirm){
-    $error_fields[] = 'rpassword';
-    $error_fields[] = 'rpassword-confirm';
+    $error_fields[] = 'reg_password';
+    $error_fields[] = 'reg_password_confirm';
     $response = [ // Создание JSON
         "status" => false,
         "message" => "Пароли не совпадают!",
@@ -46,7 +55,7 @@ if ($password !== $password_confirm){
     die(); // Прекращение выполнения кода
 }
 if (strlen($password) < 6){
-    $error_fields[] = 'rpassword';
+    $error_fields[] = 'reg_password';
     $response = [ // Создание JSON
         "status" => false,
         "message" => "Длина пароля не может быть меньше 6 символов!",
@@ -69,7 +78,13 @@ if (!empty($msg)){
     die(); // Прекращение выполнения кода
 }
 
-$insert_query = "INSERT INTO `users`(`id`, `email`, `password`) VALUES (NULL,'$email','$password')";
+$last_name = $fio_arr[0];
+$first_name = $fio_arr[1];
+$middle_name = $fio_arr[2];
+
+$password_hash = hash("sha256", $password);
+
+$insert_query = "INSERT INTO `users`(`id`, `email`, `first_name`, `middle_name`, `last_name`, `password`) VALUES (NULL,'$email', '$first_name', '$middle_name', '$last_name', '$password_hash')";
 mysqli_query($connect, $insert_query);
 
 $response = [ // Создание JSON
@@ -77,4 +92,5 @@ $response = [ // Создание JSON
     "message" => "Аккаунт зарегистрирован. Авторизируйтесь"
 ];
 echo json_encode($response); // Отправка JSON на страницу
+die();
 

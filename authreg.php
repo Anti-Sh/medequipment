@@ -34,7 +34,7 @@
                     <label for="reg_email">E-mail</label>
                     <input type="email" name="reg_email" id="reg_email" placeholder="example@mail.ru">
                     <label for="reg_name">ФИО</label>
-                    <input type="text" name="reg_name" id="reg_lastname" placeholder="Иванов Иван Иванович">
+                    <input type="text" name="reg_name" id="reg_name" placeholder="Иванов Иван Иванович">
                     <label for="reg_password">Пароль</label>
                     <input type="password" name="reg_password" id="reg_password" placeholder="**************">
                     <label for="reg_password_confirm">Подтвердите пароль</label>
