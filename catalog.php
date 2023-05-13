@@ -11,198 +11,69 @@
 <body>
     <?php 
         include "components/header.php";
+
+        $query1 = "SELECT * FROM `categories`";
+        $response = mysqli_query($connect, $query1);
     ?>
     <main>
         <section class="container">
             <h1 class="title">Каталог</h1>
             <div class="sections__top">
-                <a href="#">
-                    <img src="src/images/catalog1.png" alt="img">
+                <?php
+                while( $item = mysqli_fetch_assoc($response)):
+                ?>
+                <a href="#" data-category-id="<?= $item['id'] ?>">
+                    <img src="<?= $item['img_src'] ?>" alt="img">
                     <p>
-                        Тренажёры для реабилитации
+                        <?= $item['name'] ?>
                     </p>
                 </a>
-                <a href="#">
-                    <img src="src/images/catalog2.png" alt="img">
-                    <p>
-                        Тренажёры для реабилитации
-                    </p>
-                </a>
-                <a href="#">
-                    <img src="src/images/catalog3.webp" alt="img">
-                    <p>
-                        Тренажёры для реабилитации
-                    </p>
-                </a>
-                <a href="#">
-                    <img src="src/images/catalog3.webp" alt="img">
-                    <p>
-                        Тренажёры для реабилитации
-                    </p>
-                </a>
+                <?php
+                endwhile;
+                ?>
             </div>
         </section>
-
+        
+        <?php
+        $response = mysqli_query($connect, $query1);
+        while( $cat = mysqli_fetch_assoc($response) ):
+        ?>
         <section class="catalog container">
             <div class="catalog__slider__wrapper">
+                <?
+                $cat_id = $cat['id'];
+                $query_get_count = "SELECT COUNT(*) FROM `catalog_items` WHERE `category_id`='$cat_id'";
+                $count = mysqli_fetch_row(mysqli_query($connect, $query_get_count))[0];
+
+                $query_get_items = "SELECT * FROM `catalog_items` WHERE `category_id`='$cat_id'";
+                $items = mysqli_query($connect, $query_get_items);
+                ?>
                 <div class="сatalog__slider__top">
-                    <a href="#" class="catalog__slider__category">Тренажеры (7)</a>
+                    <a href="#" class="catalog__slider__category" data-category-id="<?= $item['id'] ?>"><?= $cat["name"] ?> (<?=$count?>)</a>
                 </div>
                 <div class="catalog__items__wrapper">
+                    <?
+                    while( $item = mysqli_fetch_assoc($items) ):
+                    ?>
                     <div class="catalog__item">
                         <a href="#" class="catalog__item__img__link">
-                            <img src="https://grand-medika.ru/wp-content/uploads/2022/12/ortorent-s-detskij-927x1024-1.jpg" width="295" height="200" loading="lazy" alt="item" class="catalog__item__img">
+                            <img src="<?= $item["img_src"] ?>" width="295" height="200" loading="lazy" alt="item" class="catalog__item__img">
                         </a> 
-                        <div class="catalog__item__name">Тренажёр реабилитационный беговая дорожка (тредбан, тредмилл) с БОС «Орторент» модель «Детская» со стационарным подвесом «Орторент С»</div> 
+                        <div class="catalog__item__name"><?= $item["name"] ?></div> 
                         <div class="catalog__item__text">
-                            <p>Детская беговая дорожка с подвесом реабилитационным для вертикализации пациента «Орторент» — это система, позволяющая проводить реабилитацию детей с заболеваниями опорно-двигательного аппарата.</p>
+                            <p><?= $item["short_desc"] ?></p>
                         </div>
-                        <a href="#" class="catalog__item__btn">Подробнее</a>
+                        <a href="#" class="catalog__item__btn" data-item-id="<?= $item["id"] ?>">Подробнее</a>
                     </div>
-                    <div class="catalog__item">
-                        <a href="#" class="catalog__item__img__link">
-                            <img src="https://grand-medika.ru/wp-content/uploads/2022/12/ortorent-s-detskij-927x1024-1.jpg" width="295" height="200" loading="lazy" alt="item" class="catalog__item__img">
-                        </a> 
-                        <div class="catalog__item__name">Тренажёр реабилитационный беговая дорожка (тредбан, тредмилл) с БОС «Орторент» модель «Детская» со стационарным подвесом «Орторент С»</div> 
-                        <div class="catalog__item__text">
-                            <p>Детская беговая дорожка с подвесом реабилитационным для вертикализации пациента «Орторент» — это система, позволяющая проводить реабилитацию детей с заболеваниями опорно-двигательного аппарата.</p>
-                        </div>
-                        <a href="#" class="catalog__item__btn">Подробнее</a>
-                    </div>
-                    <div class="catalog__item">
-                        <a href="#" class="catalog__item__img__link">
-                            <img src="https://grand-medika.ru/wp-content/uploads/2022/12/ortorent-s-detskij-927x1024-1.jpg" width="295" height="200" loading="lazy" alt="item" class="catalog__item__img">
-                        </a> 
-                        <div class="catalog__item__name">Тренажёр реабилитационный беговая дорожка (тредбан, тредмилл) с БОС «Орторент» модель «Детская» со стационарным подвесом «Орторент С»</div> 
-                        <div class="catalog__item__text">
-                            <p>Детская беговая дорожка с подвесом реабилитационным для вертикализации пациента «Орторент» — это система, позволяющая проводить реабилитацию детей с заболеваниями опорно-двигательного аппарата.</p>
-                        </div>
-                        <a href="#" class="catalog__item__btn">Подробнее</a>
-                    </div>
-                    <div class="catalog__item">
-                        <a href="#" class="catalog__item__img__link">
-                            <img src="https://grand-medika.ru/wp-content/uploads/2022/12/ortorent-s-detskij-927x1024-1.jpg" width="295" height="200" loading="lazy" alt="item" class="catalog__item__img">
-                        </a> 
-                        <div class="catalog__item__name">Тренажёр реабилитационный беговая дорожка (тредбан, тредмилл) с БОС «Орторент» модель «Детская» со стационарным подвесом «Орторент С»</div> 
-                        <div class="catalog__item__text">
-                            <p>Детская беговая дорожка с подвесом реабилитационным для вертикализации пациента «Орторент» — это система, позволяющая проводить реабилитацию детей с заболеваниями опорно-двигательного аппарата.</p>
-                        </div>
-                        <a href="#" class="catalog__item__btn">Подробнее</a>
-                    </div>
-                    <div class="catalog__item">
-                        <a href="#" class="catalog__item__img__link">
-                            <img src="https://grand-medika.ru/wp-content/uploads/2022/12/ortorent-s-detskij-927x1024-1.jpg" width="295" height="200" loading="lazy" alt="item" class="catalog__item__img">
-                        </a> 
-                        <div class="catalog__item__name">Тренажёр реабилитационный беговая дорожка (тредбан, тредмилл) с БОС «Орторент» модель «Детская» со стационарным подвесом «Орторент С»</div> 
-                        <div class="catalog__item__text">
-                            <p>Детская беговая дорожка с подвесом реабилитационным для вертикализации пациента «Орторент» — это система, позволяющая проводить реабилитацию детей с заболеваниями опорно-двигательного аппарата.</p>
-                        </div>
-                        <a href="#" class="catalog__item__btn">Подробнее</a>
-                    </div>
-                    <div class="catalog__item">
-                        <a href="#" class="catalog__item__img__link">
-                            <img src="https://grand-medika.ru/wp-content/uploads/2022/12/ortorent-s-detskij-927x1024-1.jpg" width="295" height="200" loading="lazy" alt="item" class="catalog__item__img">
-                        </a> 
-                        <div class="catalog__item__name">Тренажёр реабилитационный беговая дорожка (тредбан, тредмилл) с БОС «Орторент» модель «Детская» со стационарным подвесом «Орторент С»</div> 
-                        <div class="catalog__item__text">
-                            <p>Детская беговая дорожка с подвесом реабилитационным для вертикализации пациента «Орторент» — это система, позволяющая проводить реабилитацию детей с заболеваниями опорно-двигательного аппарата.</p>
-                        </div>
-                        <a href="#" class="catalog__item__btn">Подробнее</a>
-                    </div>
-                    <div class="catalog__item">
-                        <a href="#" class="catalog__item__img__link">
-                            <img src="https://grand-medika.ru/wp-content/uploads/2022/12/ortorent-s-detskij-927x1024-1.jpg" width="295" height="200" loading="lazy" alt="item" class="catalog__item__img">
-                        </a> 
-                        <div class="catalog__item__name">Тренажёр реабилитационный беговая дорожка (тредбан, тредмилл) с БОС «Орторент» модель «Детская» со стационарным подвесом «Орторент С»</div> 
-                        <div class="catalog__item__text">
-                            <p>Детская беговая дорожка с подвесом реабилитационным для вертикализации пациента «Орторент» — это система, позволяющая проводить реабилитацию детей с заболеваниями опорно-двигательного аппарата.</p>
-                        </div>
-                        <a href="#" class="catalog__item__btn">Подробнее</a>
-                    </div> 
+                    <?php
+                    endwhile;
+                    ?>
                 </div>
             </div>
-        </section>        
-        <section class="catalog container">
-            <div class="catalog__slider__wrapper">
-                <div class="сatalog__slider__top">
-                    <a href="#" class="catalog__slider__category">Тренажеры (7)</a>
-                </div>
-                <div class="catalog__items__wrapper">
-                    <div class="catalog__item">
-                        <a href="#" class="catalog__item__img__link">
-                            <img src="https://grand-medika.ru/wp-content/uploads/2022/12/ortorent-s-detskij-927x1024-1.jpg" width="295" height="200" loading="lazy" alt="item" class="catalog__item__img">
-                        </a> 
-                        <div class="catalog__item__name">Тренажёр реабилитационный беговая дорожка (тредбан, тредмилл) с БОС «Орторент» модель «Детская» со стационарным подвесом «Орторент С»</div> 
-                        <div class="catalog__item__text">
-                            <p>Детская беговая дорожка с подвесом реабилитационным для вертикализации пациента «Орторент» — это система, позволяющая проводить реабилитацию детей с заболеваниями опорно-двигательного аппарата.</p>
-                        </div>
-                        <a href="#" class="catalog__item__btn">Подробнее</a>
-                    </div>
-                    <div class="catalog__item">
-                        <a href="#" class="catalog__item__img__link">
-                            <img src="https://grand-medika.ru/wp-content/uploads/2022/12/ortorent-s-detskij-927x1024-1.jpg" width="295" height="200" loading="lazy" alt="item" class="catalog__item__img">
-                        </a> 
-                        <div class="catalog__item__name">Тренажёр реабилитационный беговая дорожка (тредбан, тредмилл) с БОС «Орторент» модель «Детская» со стационарным подвесом «Орторент С»</div> 
-                        <div class="catalog__item__text">
-                            <p>Детская беговая дорожка с подвесом реабилитационным для вертикализации пациента «Орторент» — это система, позволяющая проводить реабилитацию детей с заболеваниями опорно-двигательного аппарата.</p>
-                        </div>
-                        <a href="#" class="catalog__item__btn">Подробнее</a>
-                    </div>
-                    <div class="catalog__item">
-                        <a href="#" class="catalog__item__img__link">
-                            <img src="https://grand-medika.ru/wp-content/uploads/2022/12/ortorent-s-detskij-927x1024-1.jpg" width="295" height="200" loading="lazy" alt="item" class="catalog__item__img">
-                        </a> 
-                        <div class="catalog__item__name">Тренажёр реабилитационный беговая дорожка (тредбан, тредмилл) с БОС «Орторент» модель «Детская» со стационарным подвесом «Орторент С»</div> 
-                        <div class="catalog__item__text">
-                            <p>Детская беговая дорожка с подвесом реабилитационным для вертикализации пациента «Орторент» — это система, позволяющая проводить реабилитацию детей с заболеваниями опорно-двигательного аппарата.</p>
-                        </div>
-                        <a href="#" class="catalog__item__btn">Подробнее</a>
-                    </div>
-                    <div class="catalog__item">
-                        <a href="#" class="catalog__item__img__link">
-                            <img src="https://grand-medika.ru/wp-content/uploads/2022/12/ortorent-s-detskij-927x1024-1.jpg" width="295" height="200" loading="lazy" alt="item" class="catalog__item__img">
-                        </a> 
-                        <div class="catalog__item__name">Тренажёр реабилитационный беговая дорожка (тредбан, тредмилл) с БОС «Орторент» модель «Детская» со стационарным подвесом «Орторент С»</div> 
-                        <div class="catalog__item__text">
-                            <p>Детская беговая дорожка с подвесом реабилитационным для вертикализации пациента «Орторент» — это система, позволяющая проводить реабилитацию детей с заболеваниями опорно-двигательного аппарата.</p>
-                        </div>
-                        <a href="#" class="catalog__item__btn">Подробнее</a>
-                    </div>
-                    <div class="catalog__item">
-                        <a href="#" class="catalog__item__img__link">
-                            <img src="https://grand-medika.ru/wp-content/uploads/2022/12/ortorent-s-detskij-927x1024-1.jpg" width="295" height="200" loading="lazy" alt="item" class="catalog__item__img">
-                        </a> 
-                        <div class="catalog__item__name">Тренажёр реабилитационный беговая дорожка (тредбан, тредмилл) с БОС «Орторент» модель «Детская» со стационарным подвесом «Орторент С»</div> 
-                        <div class="catalog__item__text">
-                            <p>Детская беговая дорожка с подвесом реабилитационным для вертикализации пациента «Орторент» — это система, позволяющая проводить реабилитацию детей с заболеваниями опорно-двигательного аппарата.</p>
-                        </div>
-                        <a href="#" class="catalog__item__btn">Подробнее</a>
-                    </div>
-                    <div class="catalog__item">
-                        <a href="#" class="catalog__item__img__link">
-                            <img src="https://grand-medika.ru/wp-content/uploads/2022/12/ortorent-s-detskij-927x1024-1.jpg" width="295" height="200" loading="lazy" alt="item" class="catalog__item__img">
-                        </a> 
-                        <div class="catalog__item__name">Тренажёр реабилитационный беговая дорожка (тредбан, тредмилл) с БОС «Орторент» модель «Детская» со стационарным подвесом «Орторент С»</div> 
-                        <div class="catalog__item__text">
-                            <p>Детская беговая дорожка с подвесом реабилитационным для вертикализации пациента «Орторент» — это система, позволяющая проводить реабилитацию детей с заболеваниями опорно-двигательного аппарата.</p>
-                        </div>
-                        <a href="#" class="catalog__item__btn">Подробнее</a>
-                    </div>
-                    <div class="catalog__item">
-                        <a href="#" class="catalog__item__img__link">
-                            <img src="https://grand-medika.ru/wp-content/uploads/2022/12/ortorent-s-detskij-927x1024-1.jpg" width="295" height="200" loading="lazy" alt="item" class="catalog__item__img">
-                        </a> 
-                        <div class="catalog__item__name">Тренажёр реабилитационный беговая дорожка (тредбан, тредмилл) с БОС «Орторент» модель «Детская» со стационарным подвесом «Орторент С»</div> 
-                        <div class="catalog__item__text">
-                            <p>Детская беговая дорожка с подвесом реабилитационным для вертикализации пациента «Орторент» — это система, позволяющая проводить реабилитацию детей с заболеваниями опорно-двигательного аппарата.</p>
-                        </div>
-                        <a href="#" class="catalog__item__btn">Подробнее</a>
-                    </div> 
-                </div>
-            </div>
-        </section>        
-
-
+        </section>   
+        <?php
+        endwhile;
+        ?>
     </main>
     <?php 
         include "components/footer.php";

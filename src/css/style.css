@@ -560,7 +560,8 @@ main {
 }
 
 .catalog__item {
-    height: 100%;
+    min-height: 31.2em;
+    /* height: 100%; */
     width: 20vw;
     margin: 0 2vw;
     padding: 1.5em 1.375em;
@@ -1045,7 +1046,7 @@ footer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: stretch;
     justify-content: flex-start;
 }
 

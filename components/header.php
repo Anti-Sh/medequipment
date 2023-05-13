@@ -1,6 +1,6 @@
 <? 
 session_start(); 
-//$connect = mysqli_connect('localhost', 'root', '', 'pool') or die('Не удалось подключиться к базе данных');
+$connect = mysqli_connect('localhost', 'root', '', 'medequip') or die('Не удалось подключиться к базе данных');
 ?>
 <header>
     <div class="wrapper">
