@@ -9,16 +9,21 @@
                 <img src="src/images/close.png" alt="close">
             </div>
         </div>
-        <div class="cart__item">
-            <h4>Тритатушечки атрита татаатритататаа тритатат аатрита татаатрита татаатрит атата</h4>
-            <div class="count__panel">
-                <button>-</button>
-                <span>1</span>
-                <button>+</button>
-
-            </div>
-        </div>
         <?
+        if (isset($_SESSION["cart"])):
+            foreach($_SESSION["cart"] as $item => $arr):
+        ?>
+            <div class="cart__item" id="cart_item<?=$item?>">
+                <h4><?=$arr["name"]?></h4>
+                <div class="count__panel">
+                    <button class="decrement" data-item-id="<?=$item?>">-</button>
+                    <span><?=$arr["count"]?></span>
+                    <button class="increment" data-item-id="<?=$item?>">+</button>
+                </div>
+            </div>
+        <?
+            endforeach;
+        endif;
         if($isUser):
         ?>
         <button class="smb">Оформить</button>
@@ -48,18 +53,18 @@
                         <li class="menu-item">
                             <a href="#"><b>Каталог</b></a>
                             <ul class="sub-menu">
-                                <li class="menu-item"><a href="#">Дезинфекция и стерилизация</a></li>
-                                <li class="menu-item"><a href="#">Оборудование для реанимации</a></li>
-                                <li class="menu-item"><a href="#">Тренажеры для реабилитации</a></li>
+                                <li class="menu-item"><a href="catalog.php?name=disinfection">Дезинфекция и стерилизация</a></li>
+                                <li class="menu-item"><a href="catalog.php?name=equipment">Оборудование для реанимации</a></li>
+                                <li class="menu-item"><a href="catalog.php?name=reabilitation">Тренажеры для реабилитации</a></li>
                             </ul>
                         </li>
                     </ul>					
                 </div>	
                 <div class="footer__nav">
                     <ul id="menu-podval-2" class="">
-                        <li class="menu-item"><a href="#">Главная</a></li>
-                        <li class="menu-item"><a href="#">О компании</a></li>
-                        <li class="menu-item"><a href="#">Личный кабинет</a></li>
+                        <li class="menu-item"><a href="/">Главная</a></li>
+                        <li class="menu-item"><a href="/about.php">О компании</a></li>
+                        <li class="menu-item"><a href="/authreg.php">Личный кабинет</a></li>
                     </ul>
                 </div>
             </div>

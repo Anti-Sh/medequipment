@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/jquery.maskedinput/src/jquery.maskedinput.js" type="text/javascript"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="src/images/favicon.png">
     <link rel="stylesheet" href="src/css/style.css">
     <title>Магазин медицинского оборудования</title>
 </head>
@@ -23,12 +25,12 @@
                     <li><span style="font-weight: 400;"> Тренажеры для реабилитации;</span></li>
                     <li><span style="font-weight: 400;"> Оборудование и материалы для стерилизации.</span></li>
                     </ul>
-                    <p><span style="font-weight: 400;">Полный список товаров смотрите </span><a href="https://grand-medika.ru/catalog/"><span style="font-weight: 400;">в каталоге</span></a><span style="font-weight: 400;">. Если вам нужны медицинские изделия, которых там нет, свяжитесь с нами. Мы оценим ситуацию и постараемся помочь.</span></p>
+                    <p><span style="font-weight: 400;">Полный список товаров смотрите </span><a href="catalog.php"><span style="font-weight: 400;">в каталоге</span></a><span style="font-weight: 400;">. Если вам нужны медицинские изделия, которых там нет, свяжитесь с нами. Мы оценим ситуацию и постараемся помочь.</span></p>
                     <p><span style="font-weight: 400;">Надеемся, что наше знакомство перерастет в долгое взаимовыгодное сотрудничество.</span></p>
                     <h2><span style="font-weight: 400;">Чем мы можем быть вам полезны</span></h2>
                     <p><span style="font-weight: 400;">В список наших услуг входит:</span></p>
                     <ul>
-                    <li><span style="font-weight: 400;"><a href="/contacts/"> КОНСУЛЬТИРОВАНИЕ</a>. Мы предоставим вам исчерпывающую информацию о назначении и характеристиках нашей техники, правилах ее эксплуатации. Следование этим правилам ‒ залог того, что медтехника прослужит долго.</span></li>
+                    <li><span style="font-weight: 400;">КОНСУЛЬТИРОВАНИЕ. Мы предоставим вам исчерпывающую информацию о назначении и характеристиках нашей техники, правилах ее эксплуатации. Следование этим правилам ‒ залог того, что медтехника прослужит долго.</span></li>
                     <li><span style="font-weight: 400;"> ДОСТАВКА со складов до места размещения.</span></li>
                     <li><span style="font-weight: 400;"> УСТАНОВКА с учетом специфики оборудования и помещения.</span></li>
                     </ul>

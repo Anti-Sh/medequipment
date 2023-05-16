@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/jquery.maskedinput/src/jquery.maskedinput.js" type="text/javascript"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="src/images/favicon.png">
     <link rel="stylesheet" href="src/css/style.css">
     <title>Магазин медицинского оборудования</title>
 </head>
@@ -25,6 +27,9 @@
                 $response = mysqli_query($connect, $query);
                 $user = mysqli_fetch_assoc($response);
                 $fio = $user["last_name"] . " " . $user["first_name"] . " " . $user["middle_name"];
+                $count_query = "SELECT COUNT(*) FROM `orders` WHERE `user_id`=" . $_SESSION["user"]["id"];
+                $response = mysqli_query($connect, $count_query);
+                $count = mysqli_fetch_row($response)[0];
                 ?>
                 <form class="authreg__form" action="core/logout.php" method="post" id="profile-form">
                     <label for="auth_email">E-mail</label>
@@ -32,7 +37,7 @@
                     <label for="auth_email">ФИО</label>
                     <input type="text" name="fio" id="fio" value="<?= $fio ?>" disabled>
                     <label for="auth_email">Количество заказов</label>
-                    <input type="text" name="fio" id="orders_count" value="0" disabled>
+                    <input type="text" name="orders_count" id="orders_count" value="<?=$count?>" disabled>
                     <input type="submit" value="Выйти">
                 </form>
             </div>

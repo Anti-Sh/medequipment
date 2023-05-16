@@ -1209,6 +1209,12 @@ footer {
     border-width: 0;
 }
 
+.cart__item h4:hover,
+.count__panel,
+.cart__item span:hover {
+    cursor: default;
+}
+
 .count__panel button:hover,
 .close__wrapper:hover,
 .cart:hover {
@@ -1249,3 +1255,4 @@ footer {
 .cart_list button.smb:hover { 
     cursor: pointer;
 }
+

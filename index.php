@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="node_modules/jquery/dist/jquery.js" type="text/javascript"></script>
     <script src="node_modules/jquery.maskedinput/src/jquery.maskedinput.js" type="text/javascript"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="src/images/favicon.png">
     <link rel="stylesheet" href="src/css/style.css">
     <title>Магазин медицинского оборудования</title>
 </head>
@@ -113,7 +114,13 @@
                                 <div class="catalog__item__text">
                                     <p><?= $item["short_desc"] ?></p>
                                 </div>
-                                <a href="#" class="catalog__item__btn" data-item-id="<?= $item["id"] ?>">В корзину</a>
+                                <?
+                                $text = "В корзину";
+                                if(isset($_SESSION["cart"][$item["id"]])) {
+                                    $text = "В корзине";
+                                }
+                                ?>
+                                <a href="" class="catalog__item__btn" data-item-id="<?= $item["id"] ?>"><?=$text?></a>
                             </div>
                         </li>
                         <?php

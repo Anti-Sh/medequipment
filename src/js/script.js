@@ -146,7 +146,7 @@ $(function() {
     $("body").on("click", ".catalog__item__btn", (e) => {
         e.preventDefault();
         let itemId = $(e.target).data()["itemId"];
-        
+
         $.ajax({
             url: '../../core/add_to_cart.php',
             type: 'POST',
@@ -157,11 +157,21 @@ $(function() {
             success (data) {
                 if (data.status) {
                     if (data.isAdded) {
-                        $("").insertAfter($(".cart__title__wrapper"))
-                        // Сюда функцию добавления в DOM
+                        let elem = 
+                        `<div class="cart__item" id="cart_item${itemId}">
+                            <h4>${data.itemName}</h4>
+                            <div class="count__panel">
+                                <button class="decrement" data-item-id="${itemId}">-</button>
+                                <span>1</span>
+                                <button class="increment" data-item-id="${itemId}">+</button>
+                            </div>
+                        </div>`;
+                        $(elem).insertAfter($(".cart__title__wrapper"));
+                        e.currentTarget.innerText = "В корзине";
                     }
                     else {
-                        // Функция удаления из DOM
+                        $("#cart_item"+itemId).remove();
+                        e.currentTarget.innerText = "В корзину";
                     }
                     notification("Успешно", data.message);
                     
@@ -174,7 +184,67 @@ $(function() {
                 console.log(data.responseText);
             }
         });
+    })
 
+    $("body").on("click", ".count__panel button", (e) => {
+        e.preventDefault();
+        let itemId = $(e.target).data()["itemId"],
+            isAdd = false;
+
+        if(e.currentTarget.className === "increment") {
+            isAdd = true;
+        }
+
+        $.ajax({
+            url: '../../core/change_count.php',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                itemId: itemId,
+                isAdd: isAdd
+            },
+            success (data) {
+                if (data.status) {
+                    if(data.isDeleted){
+                        $("#cart_item"+itemId).remove();
+                    } else {
+                        e.currentTarget.parentElement.children[1].innerText = data.newCount;
+                    }
+                } 
+                else {
+                    notification("Ошибка", data.message);
+                }
+            },
+            error(data){
+                console.log(data.responseText);
+            }
+        });
+    })
+
+    $("body").on("click", ".cart_list .smb", (e) => {
+        e.preventDefault();
+        console.log("start");
+
+        $.ajax({
+            url: '../../core/make_order.php',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                mark: 1
+            },
+            success (data) {
+                if (data.status) {
+                    notification("Успешно", data.message);
+                    window.location.reload();
+                } 
+                else {
+                    notification("Ошибка", data.message);
+                }
+            },
+            error(data){
+                console.log(data.responseText);
+            }
+        });
     })
 
     
