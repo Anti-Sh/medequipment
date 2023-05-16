@@ -1,6 +1,11 @@
 <? 
 session_start(); 
 $connect = mysqli_connect('localhost', 'root', '', 'medequip') or die('Не удалось подключиться к базе данных');
+
+$query1 = "SELECT * FROM `categories`";
+$response = mysqli_query($connect, $query1);
+
+$isUser = isset($_SESSION["user"]);
 ?>
 <header>
     <div class="wrapper">
@@ -18,22 +23,32 @@ $connect = mysqli_connect('localhost', 'root', '', 'medequip') or die('Не уд
                 <li class="nav_item" id="menu-catalog-link">
                     <a href="../catalog.php">Каталог</a>
                     <ul>
+                        <?
+                        while( $item = mysqli_fetch_assoc($response)):
+                        ?>
                         <li>
-                            <a href="#">Тренажеры для реабилитации</a>
+                            <a href="catalog.php?name=<?=$item["en_alias"]?>"> <?= $item["name"] ?> </a>
                         </li>
-                        <li>
-                            <a href="#">Дезинфекция и стерилизация</a>
-                        </li>
-                        <li>
-                            <a href="#">Оборудование для реанимации</a>
-                        </li>
+                        <?
+                        endwhile;
+                        ?>
                     </ul>
                 </li>
                 <li class="nav_item">
                     <a href="../about.php">О компании</a>
                 </li>
                 <li class="nav_item">
-                    <a href="../authreg.php">Личный кабинет</a>
+                    <?
+                    if (!$isUser):
+                    ?>
+                    <a href="../authreg.php">Авторизация</a>
+                    <?
+                    else:
+                    ?>
+                    <a href="../profile.php">Личный кабинет</a>
+                    <?
+                    endif;
+                    ?>
                 </li>
             </ul>
         </nav>

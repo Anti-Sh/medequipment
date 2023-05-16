@@ -1,3 +1,33 @@
+<div class="cart__wrapper">
+    <div class="cart">
+        <img src="src/images/cart.png" alt="cart">
+    </div>
+    <div class="cart_list"  style="display: none;">
+        <div class="cart__title__wrapper">
+            <h3 class="title">Корзина</h3>
+            <div class="close__wrapper">
+                <img src="src/images/close.png" alt="close">
+            </div>
+        </div>
+        <div class="cart__item">
+            <h4>Тритатушечки атрита татаатритататаа тритатат аатрита татаатрита татаатрит атата</h4>
+            <div class="count__panel">
+                <button>-</button>
+                <span>1</span>
+                <button>+</button>
+
+            </div>
+        </div>
+        <?
+        if($isUser):
+        ?>
+        <button class="smb">Оформить</button>
+        <?
+        endif;
+        ?>
+    </div>
+</div>  
+
 <div class="notifications__wrapper">
         
 </div>

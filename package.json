@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "jquery": "^3.6.4"
+    "jquery": "^3.6.4",
+    "jquery.maskedinput": "^1.4.1"
   }
 }

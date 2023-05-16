@@ -22,7 +22,7 @@
                 <?php
                 while( $item = mysqli_fetch_assoc($response)):
                 ?>
-                <a href="#" data-category-id="<?= $item['id'] ?>">
+                <a href="../catalog.php?name=<?= $item['en_alias'] ?>" data-category-id="<?= $item['id'] ?>">
                     <img src="<?= $item['img_src'] ?>" alt="img">
                     <p>
                         <?= $item['name'] ?>
@@ -37,6 +37,10 @@
         <?php
         $response = mysqli_query($connect, $query1);
         while( $cat = mysqli_fetch_assoc($response) ):
+            if (isset($_GET["name"])) {
+                if ($_GET["name"] != $cat["en_alias"]) continue;
+            }
+        
         ?>
         <section class="catalog container">
             <div class="catalog__slider__wrapper">
@@ -47,30 +51,33 @@
 
                 $query_get_items = "SELECT * FROM `catalog_items` WHERE `category_id`='$cat_id'";
                 $items = mysqli_query($connect, $query_get_items);
+                $counter = 0;
                 ?>
                 <div class="сatalog__slider__top">
-                    <a href="#" class="catalog__slider__category" data-category-id="<?= $item['id'] ?>"><?= $cat["name"] ?> (<?=$count?>)</a>
+                    <a href="catalog.php?name=<?= $cat['en_alias'] ?>" class="catalog__slider__category" data-category-id="<?= $item['id'] ?>"><?= $cat["name"] ?> (<?=$count?>)</a>
                 </div>
                 <div class="catalog__items__wrapper">
                     <?
                     while( $item = mysqli_fetch_assoc($items) ):
+                        $counter += 1;
+                        if(!isset($_GET["name"]) && $counter == 9) break; 
                     ?>
                     <div class="catalog__item">
-                        <a href="#" class="catalog__item__img__link">
+                        <a href="" class="catalog__item__img__link">
                             <img src="<?= $item["img_src"] ?>" width="295" height="200" loading="lazy" alt="item" class="catalog__item__img">
                         </a> 
                         <div class="catalog__item__name"><?= $item["name"] ?></div> 
                         <div class="catalog__item__text">
                             <p><?= $item["short_desc"] ?></p>
                         </div>
-                        <a href="#" class="catalog__item__btn" data-item-id="<?= $item["id"] ?>">Подробнее</a>
+                        <a href="" class="catalog__item__btn" data-item-id="<?= $item["id"] ?>">В корзину</a>
                     </div>
                     <?php
                     endwhile;
                     ?>
                 </div>
             </div>
-        </section>   
+        </section>
         <?php
         endwhile;
         ?>

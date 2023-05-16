@@ -548,6 +548,10 @@ main {
     overflow: hidden;
 }
 
+.mb2em{
+    margin-bottom: 2em;
+}
+
 .slider__wrapper {
     position: relative;
     width: 100%;
@@ -555,8 +559,13 @@ main {
     z-index: 1;
     display: flex;
     justify-content: center;
+    align-items: stretch;
     transition-property: transform;
     box-sizing: content-box;
+}
+
+.slider__wrapper .catalog__item {
+    height: 100%;
 }
 
 .catalog__item {
@@ -1144,4 +1153,99 @@ footer {
     border: max(1px,0.0715em) solid var(--blue);
     border-radius: 1.475em;
     pointer-events: none;
+}
+
+.cart__wrapper {
+    z-index: 150;
+    position: fixed;
+    border-radius: 1.475em;
+    bottom: 2em;
+    right: 2em;
+    padding: 1.175em;
+    background-color: #fff;
+    border: max(1px,0.0715em) solid var(--blue);
+}
+
+.cart {
+    width: 4em;
+    height: 4em;
+}
+
+.cart img {
+    width: 100%;
+    height: 100%;
+}
+
+.cart_list {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart_list .title{
+    font-size: 1.8em;
+    margin-bottom: 0;
+}
+
+.cart__item{ 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cart__item h4 {
+    max-width: 18em;
+    font-weight: 500;
+    padding: 0.7em;
+    padding-left: 0;
+}
+
+.count__panel button {
+    width: 1.6em;
+    height: 1.6em;
+    background-color: #007BFB;
+    color: #fff;
+    border-radius: 1.175em;
+    border-width: 0;
+}
+
+.count__panel button:hover,
+.close__wrapper:hover,
+.cart:hover {
+    cursor: pointer;
+}
+
+.cart__title__wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.close__wrapper {
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.close__wrapper img{
+    height: 100%;
+    width: 100%;
+}
+
+.cart_list button.smb {
+    font-size: 0.875em;
+    border: max(1px,0.0715em) solid var(--blue);
+    background-color: #fff;
+    width: 10.785em;
+    height: 3.2143em;
+    margin-top: auto;
+    letter-spacing: -0.02em;
+    border-radius: 2.7777em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.cart_list button.smb:hover { 
+    cursor: pointer;
 }

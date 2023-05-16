@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js" type="text/javascript"></script>
+    <script src="node_modules/jquery.maskedinput/src/jquery.maskedinput.js" type="text/javascript"></script>
     <link rel="stylesheet" href="src/css/style.css">
     <title>Магазин медицинского оборудования</title>
 </head>
@@ -21,24 +22,24 @@
                     <svg class="banner__item1SVG" width="131" height="115" viewBox="0 0 131 115" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M61.7592 115L51.4905 105.269C41.0261 95.9316 32.4444 87.8964 25.7452 81.1635C19.0461 74.4306 13.7895 68.4103 9.97536 63.1026C6.16125 57.7949 3.54517 53.0032 2.1271 48.7276C0.709033 44.4519 0 39.906 0 35.0897C0 25.359 3.27622 17.078 9.82867 10.2468C16.3811 3.4156 24.4005 0 33.8869 0C39.3636 0 44.4735 1.15491 49.2167 3.46474C53.9599 5.77457 58.1407 9.28846 61.7592 14.0064C65.8667 9.19017 70.1943 5.65171 74.7419 3.39103C79.2895 1.13034 84.2527 0 89.6316 0C97.9444 0 105.157 2.875 111.269 8.625C117.382 14.375 121.171 21.4765 122.638 29.9295H108.849C108.066 25.6047 106.037 21.7959 102.761 18.5032C99.4847 15.2105 95.1083 13.5641 89.6316 13.5641C85.1329 13.5641 80.732 15.063 76.4289 18.0609C72.1258 21.0588 69.143 25.2115 67.4804 30.5192H56.3315C54.4733 25.3098 51.3927 21.1816 47.0896 18.1346C42.7865 15.0876 38.3856 13.5641 33.8869 13.5641C27.9212 13.5641 23.0314 15.6036 19.2172 19.6827C15.4031 23.7618 13.4961 28.8483 13.4961 34.9423C13.4961 38.9722 14.2296 42.781 15.6965 46.3686C17.1635 49.9562 19.7062 54.0598 23.3247 58.6795C26.9433 63.2991 31.882 68.6805 38.1411 74.8237C44.4002 80.9669 52.2729 88.4615 61.7592 97.3077C64.2042 94.8504 66.3068 92.9092 68.0672 91.484C69.8276 90.0588 71.8813 88.2158 74.2284 85.9551L75.7688 87.5769L78.9227 90.8942C79.9985 92.0246 81.0498 93.0566 82.0767 93.9904L83.617 95.391C81.1721 97.5534 79.045 99.4455 77.2357 101.067C75.4265 102.689 73.0549 104.876 70.1209 107.628L61.7592 115ZM98.5801 89.3461V70.1795H79.5095V56.7628H98.5801V37.5962H111.929V56.7628H131V70.1795H111.929V89.3461H98.5801Z" fill="white"></path>
                     </svg>
-                    <a href="/catalog/trenazhery-dlya-reabilitacii/" class="banner__item1Btn">Подробнее</a>
+                    <a href="catalog.php?name=reabilitation" class="banner__item1Btn">Подробнее</a>
                 </div>
                 <div class="banner__item2">
                     <div class="banner__item2Title">Дезинфекция<br> и стерилизация</div>
                     <div class="banner__item2Text">Качественный состав и высокая эффективность действия.</div>
-                    <a href="/catalog/dezinfekciya-i-sterilizaciya/" class="banner__item2Link"></a>
+                    <a href="catalog.php?name=disinfection" class="banner__item2Link"></a>
                 </div> 
                 <div class="banner__item2">
                     <div class="banner__item2Title">Передовое оборудование для реанимации</div>
                     <div class="banner__item2Text">Только самые современные технологии.</div>
-                    <a href="/catalog/oborudovanie-dlya-reanimacii/" class="banner__item2Link"></a>
+                    <a href="catalog.php?name=equipment" class="banner__item2Link"></a>
                 </div> 
             </div>
             <div class="banner__right">
                 <div class="banner__rightSubtitle">ГРАНД - МЕДИКА</div>
                 <div class="banner__rightTitle">Поставщик медицинского<br> оборудования в Новосибирске</div>
                 <div class="banner__rightText">Качественное консультирование, быстрая доставка и установка оборудования.</div>
-                <a href="/catalog/" class="banner__rightBtn">Подробнее</a>
+                <a href="catalog.php" class="banner__rightBtn">Подробнее</a>
                 <img src="src/images/banner.png" alt="banner" width="674" height="407" class="banner__rightImg">
             </div>
         </section>
@@ -77,63 +78,54 @@
                 </h2>
                 <a href="catalog.php">Перейти в каталог</a>
             </div>
-            <div class="catalog__slider__wrapper">
+            <?php
+            $query1 = "SELECT * FROM `categories`";
+            $response = mysqli_query($connect, $query1);
+            while( $cat = mysqli_fetch_assoc($response) ):
+                if (isset($_GET["name"])) {
+                    if ($_GET["name"] != $cat["en_alias"]) continue;
+                }
+            
+            ?>
+            <div class="catalog__slider__wrapper mb2em">
+                <?
+                $cat_id = $cat['id'];
+                $query_get_count = "SELECT COUNT(*) FROM `catalog_items` WHERE `category_id`='$cat_id'";
+                $count = mysqli_fetch_row(mysqli_query($connect, $query_get_count))[0];
+
+                $query_get_items = "SELECT * FROM `catalog_items` WHERE `category_id`='$cat_id' LIMIT 4";
+                $items = mysqli_query($connect, $query_get_items);
+                ?>
                 <div class="сatalog__slider__top">
-                    <a href="#" class="catalog__slider__category">Тренажеры (7)</a>
-                    <div class="catalog__slider__nav">
-                        <button type="button" class="catalog__slider__nav__btn" onclick=""></button>
-                        <button type="button" class="catalog__slider__nav__btn" onclick=""></button>
-                    </div>
+                    <a href="catalog.php?name=<?= $cat['en_alias'] ?>" class="catalog__slider__category" data-category-id="<?= $item['id'] ?>"><?= $cat["name"] ?> (<?=$count?>)</a>
                 </div>
                 <div class="catalog__slider">
                     <ul class="slider__wrapper">
+                        <?
+                        while( $item = mysqli_fetch_assoc($items) ):
+                        ?>
                         <li class="catalog__slide">
                             <div class="catalog__item">
                                 <a href="#" class="catalog__item__img__link">
-                                    <img src="https://grand-medika.ru/wp-content/uploads/2022/12/ortorent-s-detskij-927x1024-1.jpg" width="295" height="200" loading="lazy" alt="item" class="catalog__item__img">
+                                    <img src="<?= $item["img_src"] ?>" width="295" height="200" loading="lazy" alt="item" class="catalog__item__img">
                                 </a> 
-                                <div class="catalog__item__name">Тренажёр реабилитационный беговая дорожка (тредбан, тредмилл) с БОС «Орторент» модель «Детская» со стационарным подвесом «Орторент С»</div> 
-                                <div class="catalog__item__text"><p>Детская беговая дорожка с подвесом реабилитационным для вертикализации пациента «Орторент» — это система, позволяющая проводить реабилитацию детей с заболеваниями опорно-двигательного аппарата.</p>
-                            </div>
-                                <a href="#" class="catalog__item__btn">Подробнее</a>
+                                <div class="catalog__item__name"><?= $item["name"] ?></div> 
+                                <div class="catalog__item__text">
+                                    <p><?= $item["short_desc"] ?></p>
+                                </div>
+                                <a href="#" class="catalog__item__btn" data-item-id="<?= $item["id"] ?>">В корзину</a>
                             </div>
                         </li>
-                        <li class="catalog__slide">
-                            <div class="catalog__item">
-                                <a href="#" class="catalog__item__img__link">
-                                    <img src="https://grand-medika.ru/wp-content/uploads/2022/12/ortorent-s-detskij-927x1024-1.jpg" width="295" height="200" loading="lazy" alt="item" class="catalog__item__img">
-                                </a> 
-                                <div class="catalog__item__name">Тренажёр реабилитационный беговая дорожка (тредбан, тредмилл) с БОС «Орторент» модель «Детская» со стационарным подвесом «Орторент С»</div> 
-                                <div class="catalog__item__text"><p>Детская беговая дорожка с подвесом реабилитационным для вертикализации пациента «Орторент» — это система, позволяющая проводить реабилитацию детей с заболеваниями опорно-двигательного аппарата.</p>
-                            </div>
-                                <a href="#" class="catalog__item__btn">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="catalog__slide">
-                            <div class="catalog__item">
-                                <a href="#" class="catalog__item__img__link">
-                                    <img src="https://grand-medika.ru/wp-content/uploads/2022/12/ortorent-s-detskij-927x1024-1.jpg" width="295" height="200" loading="lazy" alt="item" class="catalog__item__img">
-                                </a> 
-                                <div class="catalog__item__name">Тренажёр реабилитационный беговая дорожка (тредбан, тредмилл) с БОС «Орторент» модель «Детская» со стационарным подвесом «Орторент С»</div> 
-                                <div class="catalog__item__text"><p>Детская беговая дорожка с подвесом реабилитационным для вертикализации пациента «Орторент» — это система, позволяющая проводить реабилитацию детей с заболеваниями опорно-двигательного аппарата.</p>
-                            </div>
-                                <a href="#" class="catalog__item__btn">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="catalog__slide">
-                            <div class="catalog__item">
-                                <a href="#" class="catalog__item__img__link">
-                                    <img src="https://grand-medika.ru/wp-content/uploads/2022/12/ortorent-s-detskij-927x1024-1.jpg" width="295" height="200" loading="lazy" alt="item" class="catalog__item__img">
-                                </a> 
-                                <div class="catalog__item__name">Тренажёр реабилитационный беговая дорожка (тредбан, тредмилл) с БОС «Орторент» модель «Детская» со стационарным подвесом «Орторент С»</div> 
-                                <div class="catalog__item__text"><p>Детская беговая дорожка с подвесом реабилитационным для вертикализации пациента «Орторент» — это система, позволяющая проводить реабилитацию детей с заболеваниями опорно-двигательного аппарата.</p>
-                            </div>
-                                <a href="#" class="catalog__item__btn">Подробнее</a>
-                            </div>
-                        </li>
+                        <?php
+                        endwhile;
+                        ?>
                     </ul>
                 </div>
             </div>
+            <?
+            endwhile;
+            ?>
+
         </section>
         <section class="about container">
             <img src="src/images/pulse.svg" width="177" height="156" alt="pulse" class="about__pulse">
@@ -144,7 +136,7 @@
                 <p><span>Дата основания компании: 22.03.2017.&nbsp;</span></p>
                 <p><span>Мы работали во время пандемии, поставляли в больницы аппараты искусственной вентиляции легких, паровые стерилизаторы и другое медицинское оборудование. Мы продолжаем успешно поставлять медтехнику в условиях санкций. Мы не знаем, какие вызовы готовит нам будущее, но постараемся принять их с честью.</span></p>
             </div>
-            <a href="/about/" class="about__link">Подробнее</a>
+            <a href="about.php" class="about__link">Подробнее</a>
             <img src="src/images/about.svg" alt="about" width="2094" height="956" loading="lazy" class="about__fon">
             <div class="about__quote">
                 <svg class="about__quoteImg" width="82" height="72" viewBox="0 0 82 72" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -164,12 +156,12 @@
                     </div>
                     <div class="questions__form__wrapper">
                         <form class="feedback__form authreg__form" action="" method="post" id="feedback-form">
-                            <label for="feedback_">Наименование компании</label>
-                            <input type="text" name="feedback_cname" id="feedback_" placeholder="ОАО &laquo;ЛОГИСТ-ГРУПП&raquo;">
-                            <label for="feedback_">ФИО представителя</label>
-                            <input type="text" name="feedback_" id="feedback_" placeholder="Иванов Иван Иванович">
-                            <label for="feedback_">Контактный номер телефона</label>
-                            <input type="text" name="feedback_" id="feedback_" placeholder="Иванов Иван Иванович">
+                            <label for="feedback_cname">Наименование компании</label>
+                            <input type="text" name="feedback_cname" id="feedback_cname" placeholder="ОАО &laquo;ЛОГИСТ-ГРУПП&raquo;">
+                            <label for="feedback_representer">ФИО представителя</label>
+                            <input type="text" name="feedback_representer" id="feedback_representer" placeholder="Иванов Иван Иванович">
+                            <label for="feedback_phone">Контактный номер телефона</label>
+                            <input type="text" name="feedback_phone" id="feedback_phone" placeholder="+7(800)500-90-90">
                             <input type="submit">
                         </form>
                     </div>

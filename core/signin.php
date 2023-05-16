@@ -40,6 +40,7 @@ if (mysqli_num_rows($check_user) > 0) { // Проверка на соответ�
         "status" => true
     ];
     echo json_encode($response); // Отправка JSON на страницу
+    
 
 } 
 else {

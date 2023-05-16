@@ -11,6 +11,9 @@
 <body>
     <?php 
         include "components/header.php";
+        if (isset($_SESSION["user"])){
+            header('Location: profile.php');
+        }
     ?>
     <main>
         <section class="authregsect about container">
